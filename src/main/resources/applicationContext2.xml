@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+
+    <aop:config>
+        <aop:aspect id="myAspect" ref="myAspectConfig">
+
+            <aop:around pointcut="execution(* org.example.aopadvices.Order.displayOrderItems())"
+                        method="printLogo"/>
+
+            <aop:after pointcut="execution(* org.example.aopadvices.Order.displayOrderItems())"
+                       method="printOrderValue"/>
+
+            <aop:after-throwing pointcut="execution(* org.example.aopadvices.Order.*(..))"
+                                throwing="ex" method="logException"/>
+
+            <aop:after-returning pointcut="execution(* org.example.aopadvices.Order.displayOrderItems())"
+                                 method="applyDiscount"/>
+
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="myAspectConfig" class="org.example.AspectConfig2"/>
+
+    <bean id="orderBean" class="org.example.aopadvices.Order">
+        <property name="orderId" value="1101"/>
+        <property name="orderBy" value="Bob Brenner"/>
+        <property name="orderAddress" value="3077B Oak Ave, Seattle, WA"/>
+        <property name="orderItems">
+            <map>
+                <entry key-ref="itemBeanOne" value="2"/>
+                <entry key-ref="itemBeanTwo" value="5"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="itemBeanOne" class="org.example.aopadvices.Sd_Item">
+        <constructor-arg name="itemId" value="101"/>
+        <constructor-arg name="itemName" value="Milk"/>
+        <constructor-arg name="itemPrice" value="3.25"/>
+        <constructor-arg name="availableQuantity" value="5"/>
+    </bean>
+
+    <bean id="itemBeanTwo" class="org.example.aopadvices.Sd_Item">
+        <constructor-arg name="itemId" value="102"/>
+        <constructor-arg name="itemName" value="Bread"/>
+        <constructor-arg name="itemPrice" value="8.25"/>
+        <constructor-arg name="availableQuantity" value="10"/>
+    </bean>
+</beans>

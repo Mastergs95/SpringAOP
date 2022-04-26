@@ -1,0 +1,8 @@
+[INFO ] 2022-04-26 12:46:20.523 [main] AspectConfig - Logo printed before invocation of: displayOrderItems
+[ERROR] 2022-04-26 12:46:20.527 [main] AspectConfig - An exception has been throw when running void org.example.aopadvices.Order.displayOrderItems()
+[ERROR] 2022-04-26 12:46:20.527 [main] AspectConfig - Exception message: There are no orders in the cart
+
+
+[INFO ] 2022-04-26 12:47:50.809 [main] AspectConfig - Logo printed before invocation of: displayOrderItems
+[INFO ] 2022-04-26 12:47:50.822 [main] AspectConfig - Order total calculated and displayed as 47.75
+[INFO ] 2022-04-26 12:47:50.822 [main] AspectConfig - Discounted total calculated and displayed as 42.975
